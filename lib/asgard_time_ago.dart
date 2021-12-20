@@ -66,6 +66,8 @@ class AsgardTimeAgo {
     } else if (days < 8) {
       result = messages.daysAgo(days.round());
     } else {
+      prefix = '';
+      suffix = '';
       result = formattedDate;
     }
 
