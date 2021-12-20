@@ -1,7 +1,9 @@
 library asgard_time_ago;
 
 import 'package:asgard_time_ago/messages/languages/en_relative_time.dart';
+import 'package:asgard_time_ago/messages/languages/id_relative_time.dart';
 import 'package:asgard_time_ago/messages/languages/ru_relative_time.dart';
+import 'package:asgard_time_ago/messages/languages/uk_relative_time.dart';
 import 'package:asgard_time_ago/messages/relative_time.dart';
 import 'package:intl/intl.dart';
 
@@ -11,6 +13,8 @@ class AsgardTimeAgo {
   static final Map<String, RelativeTime> _relativeTimeMap = {
     'en': EnglishRelativeTime(),
     'ru': RussianRelativeTime(),
+    'id': IndonesianRelativeTime(),
+    'uk': UkraineRelativeTime(),
   };
 
   /// Sets the default [locale]. By default it is `en`.
