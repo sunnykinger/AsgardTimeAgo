@@ -21,7 +21,7 @@ class AsgardTimeAgo {
   }
 
   static String format(DateTime date,
-      {String? locale, bool allowFromNow = false, String? pattern}) {
+      {String? locale, bool allowFromNow = false, DateFormat? formatter}) {
     final _locale = locale ?? _defaultLocale;
     if (_relativeTimeMap[_locale] == null) {
       print(
@@ -32,8 +32,10 @@ class AsgardTimeAgo {
     final _referenceTime = DateTime.now();
     var elapsed =
         _referenceTime.millisecondsSinceEpoch - date.millisecondsSinceEpoch;
-    final _pattern = pattern ?? "dd MMM, yyyy hh:mm aa";
-    final formattedDate = DateFormat(_pattern).format(date);
+
+    final formattedDate = formatter == null
+        ? DateFormat.yMMMd().add_jm().format(date)
+        : formatter.format(date);
     String prefix, suffix;
 
     if (_allowFromNow && elapsed < 0) {
