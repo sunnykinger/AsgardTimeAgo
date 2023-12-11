@@ -35,6 +35,18 @@ class RussianRelativeTime implements RelativeTime {
   String daysAgo(int days) => '$days ${_convert(days, 'days')}';
 
   @override
+  String aboutAMonth(int days) => 'месяц';
+
+  @override
+  String months(int months) => '$months ${_convert(months, 'months')}';
+
+  @override
+  String aboutAYear(int year) => 'год';
+
+  @override
+  String years(int years) => '$years ${_convert(years, 'years')}';
+
+  @override
   String wordSeparator() => ' ';
 
   String _convert(int number, String type) {

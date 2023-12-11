@@ -35,5 +35,17 @@ class IndonesianRelativeTime implements RelativeTime {
   String daysAgo(int days) => '$days hari';
 
   @override
+  String aboutAMonth(int days) => 'sekitar sebulan';
+
+  @override
+  String months(int months) => '$months bulan';
+
+  @override
+  String aboutAYear(int year) => 'sekitar setahun';
+
+  @override
+  String years(int years) => '$years tahun';
+
+  @override
   String wordSeparator() => ' ';
 }

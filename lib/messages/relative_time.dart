@@ -28,5 +28,17 @@ abstract class RelativeTime {
   /// When time is in days
   String daysAgo(int days);
 
+  /// Format when time is about a month
+  String aboutAMonth(int days);
+
+  /// Format when time is in months
+  String months(int months);
+
+  /// Format when time is about a year
+  String aboutAYear(int year);
+
+  /// Format when time is about a year
+  String years(int years);
+
   String wordSeparator() => ' ';
 }

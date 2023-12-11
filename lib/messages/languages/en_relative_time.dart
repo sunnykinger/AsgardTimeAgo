@@ -35,5 +35,17 @@ class EnglishRelativeTime implements RelativeTime {
   String daysAgo(int days) => '$days days';
 
   @override
+  String aboutAMonth(int days) => 'about a month';
+
+  @override
+  String months(int months) => '$months months';
+
+  @override
+  String aboutAYear(int year) => 'about a year';
+
+  @override
+  String years(int years) => '$years years';
+
+  @override
   String wordSeparator() => ' ';
 }

@@ -35,6 +35,18 @@ class UkraineRelativeTime implements RelativeTime {
   String daysAgo(int days) => '$days ${_convert(days, 'days')}';
 
   @override
+  String aboutAMonth(int days) => 'місяць';
+
+  @override
+  String months(int months) => '$months ${_convert(months, 'months')}';
+
+  @override
+  String aboutAYear(int year) => 'рік';
+
+  @override
+  String years(int years) => '$years ${_convert(years, 'years')}';
+
+  @override
   String wordSeparator() => ' ';
 
   String _convert(int number, String type) {

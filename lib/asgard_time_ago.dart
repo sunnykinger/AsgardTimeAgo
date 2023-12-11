@@ -24,25 +24,22 @@ class AsgardTimeAgo {
     _defaultLocale = locale;
   }
 
-  static String format(DateTime date,
-      {String? locale, bool allowFromNow = false, DateFormat? formatter}) {
+  static String format(DateTime date, {String? locale, bool allowFromNow = false, DateFormat? formatter, bool extendedTime=false}) {
     final _locale = locale ?? _defaultLocale;
     if (_relativeTimeMap[_locale] == null) {
-      print(
-          "Locale [$_locale] has not been added, using [$_defaultLocale] as fallback. To add a locale use [setLocaleMessages]");
+      print("Locale [$_locale] has not been added, using [$_defaultLocale] as fallback. To add a locale use [setLocaleMessages]");
     }
-    final _allowFromNow = allowFromNow;
-    final messages = _relativeTimeMap[_locale] ?? EnglishRelativeTime();
-    final _referenceTime = DateTime.now();
-    var elapsed =
-        _referenceTime.millisecondsSinceEpoch - date.millisecondsSinceEpoch;
+    return _formatHelper(date, _locale, allowFromNow, formatter, extendedTime);
+  }
 
-    final formattedDate = formatter == null
-        ? DateFormat.yMMMd().add_jm().format(date)
-        : formatter.format(date);
+  static String _formatHelper(DateTime date, String locale, bool allowFromNow, DateFormat? formatter, bool showExtended) {
+    final messages = _relativeTimeMap[locale] ?? EnglishRelativeTime();
+    final DateTime _referenceTime = DateTime.now();
+    var elapsed = _referenceTime.millisecondsSinceEpoch - date.millisecondsSinceEpoch;
+
+    final formattedDate = formatter == null ? DateFormat.yMMMd().add_jm().format(date) : formatter.format(date);
     String prefix, suffix;
-
-    if (_allowFromNow && elapsed < 0) {
+    if (allowFromNow && elapsed < 0) {
       elapsed = date.isBefore(_referenceTime) ? elapsed : elapsed.abs();
       prefix = messages.prefixFromNow();
       suffix = messages.suffixFromNow();
@@ -55,6 +52,8 @@ class AsgardTimeAgo {
     final num minutes = seconds / 60;
     final num hours = minutes / 60;
     final num days = hours / 24;
+    final num months = days / 30;
+    final num years = days / 365;
 
     String result;
     if (seconds < 45) {
@@ -69,16 +68,23 @@ class AsgardTimeAgo {
       result = messages.hoursAgo(hours.round());
     } else if (hours < 48) {
       result = messages.dayAgo(hours.round());
-    } else if (days < 8) {
+    } else if (days < 8 && !showExtended) {
       result = messages.daysAgo(days.round());
+    } else if (showExtended && months < 12) {
+      result = months < 2 ? messages.aboutAMonth(months.round()) : messages.months(months.round());
+    } else if (showExtended) {
+      result = years < 2 ? messages.aboutAYear(years.round()) : messages.years(years.round());
     } else {
       prefix = '';
       suffix = '';
       result = formattedDate;
     }
 
-    return [prefix, result, suffix]
-        .where((str) => str.isNotEmpty)
-        .join(messages.wordSeparator());
+    return [prefix, result, suffix].where((str) => str.isNotEmpty).join(messages.wordSeparator());
   }
+
 }
+
+
+
+
