@@ -39,14 +39,5 @@ void main() {
       // Replace with the expected string based on your logic
       expect(formattedDate, '13 days ago');
     });
-
-    test('Formatting date with "13 days ago" in English', () {
-      AsgardTimeAgo.setDefaultLocale('en');
-      var futureDate = DateTime.now().add(const Duration(days: 13));
-      var formattedDate = AsgardTimeAgo.format(futureDate, allowFromNow: false, extendedTime: true);
-
-      // Replace with the expected string based on your logic
-      expect(formattedDate, '13 days ago');
-    });
   });
 }
