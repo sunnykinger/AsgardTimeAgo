@@ -10,6 +10,8 @@ import 'package:intl/intl.dart';
 class AsgardTimeAgo {
   static String _defaultLocale = 'en';
 
+  static String get defaultLocale => _defaultLocale;
+
   static final Map<String, RelativeTime> _relativeTimeMap = {
     'en': EnglishRelativeTime(),
     'ru': RussianRelativeTime(),
